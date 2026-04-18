@@ -1,4 +1,7 @@
-# Hangman Game
+Name--> ST Suneethra
+PRN no.-->250200233
+Sec-03
+# Assignment details 
 
 A Python implementation of the classic Hangman word-guessing game with hint functionality.
 
