@@ -1,7 +1,7 @@
 # Problem Set 2, hangman.py
-# Name: ST Suneethra
+# Name:ST Suneethra 
 # Collaborators: Yoshithaa Sree G
-# Time spent: 
+# Time spent:
 
 # Hangman Game
 # -----------------------------------
@@ -60,8 +60,15 @@ def is_word_guessed(secret_word, letters_guessed):
     returns: boolean, True if all the letters of secret_word are in letters_guessed;
       False otherwise
     '''
-    return all(letter in letters_guessed for letter in secret_word)
-
+    flag=0
+    for i in secret_word:
+        if i not in letters_guessed:
+            flag=1
+            break
+    if flag==1:
+        return False
+    else:
+        return True
 
 
 def get_guessed_word(secret_word, letters_guessed):
@@ -71,7 +78,13 @@ def get_guessed_word(secret_word, letters_guessed):
     returns: string, comprised of letters, underscores (_), and spaces that represents
       which letters in secret_word have been guessed so far.
     '''
-    return ''.join(letter if letter in letters_guessed else '_ ' for letter in secret_word)
+    result=''
+    for letter in secret_word:
+        if letter in letters_guessed:
+            result+=letter
+        else:
+            result+='_ '
+    return result
 
 
 
@@ -81,8 +94,13 @@ def get_available_letters(letters_guessed):
     returns: string (of letters), comprised of letters that represents which letters have not
       yet been guessed.
     '''
-    return ''.join(letter for letter in string.ascii_lowercase if letter not in letters_guessed)
-    
+    result=''
+    for i in range(97,123):
+        if chr(i) in letters_guessed:
+            continue
+        else:
+            result+=chr(i)
+    return result    
     
 
 def hangman(secret_word):
@@ -189,16 +207,16 @@ def match_with_gaps(my_word, other_word):
     
     if len(my_word) != len(other_word):
         return False
+    else:
+        for i in range(len(my_word)):
+            if my_word[i]=='_':
+                if other_word[i] in my_word:
+                    return False
+            else:
+                if my_word[i]!=other_word[i]:
+                    return False
+        return True 
     
-    for m, o in zip(my_word, other_word):
-        if m == '_':
-            # The hidden letter must not be a letter already revealed
-            if o in my_word:
-                return False
-        else:
-            if m != o:
-                return False
-    return True
 
 
 
@@ -214,7 +232,6 @@ def show_possible_matches(my_word):
     '''
     matches = [word for word in wordlist if match_with_gaps(my_word, word)]
     if matches:
-        print("Possible word matches are:")
         print(' '.join(matches))
     else:
         print("No matches found")
