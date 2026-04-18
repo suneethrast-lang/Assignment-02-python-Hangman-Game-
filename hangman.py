@@ -1,7 +1,7 @@
 # Problem Set 2, hangman.py
-# Name:ST Suneethra 
-# Collaborators: Yoshithaa Sree G
-# Time spent:
+# Name: ST Suneethra 
+# Collaborators:
+# Time spent: 1 week
 
 # Hangman Game
 # -----------------------------------
